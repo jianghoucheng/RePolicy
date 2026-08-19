@@ -1,0 +1,67 @@
+# --- RePolicy: large artifacts that live on the Hugging Face Hub, not in git ---
+# Training/eval data: fetch with repolicy/scripts/download_data.sh
+data/
+# Trained weights: publish with repolicy/scripts/upload_model.sh
+release/
+checkpoints/
+**/checkpoints
+*.safetensors
+*.pt
+*.ckpt
+*.bin
+
+# Experiment tracking and run outputs
+wandb/
+**/wandb
+outputs/
+**/outputs
+logs/
+*.log
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# --- Environments ---
+venv/
+.venv/
+ENV/
+.env
+.python-version
+
+# --- Testing / coverage ---
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+coverage.xml
+.hypothesis/
+
+# --- Editors and OS ---
+.idea/
+.vscode
+.DS_Store
+*.swp
+*~
+.history
+
+# --- Misc ---
+/pyrightconfig.json
+*.lock
+*.tar.gz
+**/_build/

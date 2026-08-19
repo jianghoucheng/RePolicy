@@ -1,0 +1,26 @@
+# Full development dependency set for RePolicy.
+# The minimal install set is declared in setup.py; use `pip install -e .` for that.
+accelerate
+codetiming
+datasets
+dill
+huggingface_hub
+hydra-core
+liger-kernel
+numpy<2.0.0
+pandas
+peft
+pyarrow>=19.0.0
+pybind11
+pylatexenc
+ray[default]
+tensordict>=0.8.0,<=0.10.0,!=0.9.0
+torchdata
+transformers
+wandb
+packaging>=20.0
+uvicorn
+fastapi
+tensorboard
+# Rollout engine for GRPO; pin to a version matching your CUDA/torch build.
+# vllm

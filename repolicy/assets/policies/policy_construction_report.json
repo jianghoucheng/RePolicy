@@ -1,0 +1,18 @@
+{
+  "total_benchmark_samples": 7369,
+  "final_policy_count": 30,
+  "total_clause_count": 358,
+  "coverage_rate": 1.0,
+  "number_of_uncovered_samples": 0,
+  "uncovered_sample_ids": [],
+  "average_selected_policies_per_sample": 1.6175871895779617,
+  "average_clauses_per_policy": 11.933333333333334,
+  "overlap_repair_summary": "Final false-row completion; existing covered rows preserved and new clauses appended only to policy tails.",
+  "repair_summaries": [
+    "P09: appended P09.14",
+    "P27: appended P27.11, P27.12",
+    "filled remaining unsafe rows without violations: 228",
+    "mapped one safe refusal row to P06.11"
+  ],
+  "number_of_repair_rounds": 2
+}

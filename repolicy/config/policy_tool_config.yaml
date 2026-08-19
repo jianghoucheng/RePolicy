@@ -1,0 +1,19 @@
+tools:
+  - class_name: repolicy.policy_tool.PolicyLookupTool
+    config:
+      type: native
+    tool_schema:
+      type: function
+      function:
+        name: get_policy
+        description: Retrieve full safety policy text and clauses by local policy ids. Call once with the relevant policy ids.
+        parameters:
+          type: object
+          properties:
+            policy_ids:
+              type: array
+              items:
+                type: string
+              description: Local policy ids to retrieve, such as Policy_1.
+          required:
+            - policy_ids

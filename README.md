@@ -115,9 +115,9 @@ Pulls ~2.3GB from [`JiangHoucheng/PolicyTraj-20K`](https://huggingface.co/datase
 |---|---|---|
 | `data/sft/train.parquet` | 5,000 | SFT |
 | `data/sft/val.parquet` | 500 | SFT validation |
-| `data/rl/train.jsonl` | 14,425 | GRPO |
-| `data/rl/val.jsonl` | 500 | GRPO validation |
-| `data/eval/benchmark_val.jsonl` | 7,369 | Six-benchmark evaluation |
+| `data/rl/train.parquet` | 14,425 | GRPO |
+| `data/rl/val.parquet` | 500 | GRPO validation |
+| `data/eval/benchmark_val.parquet` | 7,369 | Six-benchmark evaluation |
 
 The data ships ready to train — no preprocessing needed. Rebuilding it from raw
 annotated trajectories is only necessary if you change the policy library or the
@@ -165,7 +165,7 @@ bash repolicy/scripts/run_grpo.sh
 
 Defaults: lr 1e-6, batch 64, `ROLLOUT_N=16`, prompt 12288 / response 4096,
 `MAX_MODEL_LEN=16384`, KL coef 0.001, 3 epochs, checkpoint and validate every 10
-steps. Validation runs on both `data/rl/val.jsonl` and the benchmark suite.
+steps. Validation runs on both `data/rl/val.parquet` and the benchmark suite.
 
 **Reward** (`repolicy/reward.py`):
 
@@ -212,7 +212,7 @@ To score predictions you generated yourself, with per-benchmark unsafe F1:
 ```bash
 python -m repolicy.evaluate \
   --predictions your_outputs.jsonl \
-  --references data/eval/benchmark_val.jsonl
+  --references data/eval/benchmark_val.parquet
 ```
 
 `--predictions` is a JSONL whose rows carry the raw model text under

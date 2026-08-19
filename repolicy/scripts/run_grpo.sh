@@ -8,9 +8,9 @@
 set -xeuo pipefail
 
 MODEL_PATH=${MODEL_PATH:-checkpoints/repolicy_sft_hf}
-TRAIN_FILE=${TRAIN_FILE:-data/rl/train.jsonl}
-VAL_FILE=${VAL_FILE:-data/rl/val.jsonl}
-BENCHMARK_VAL_FILE=${BENCHMARK_VAL_FILE:-data/eval/benchmark_val.jsonl}
+TRAIN_FILE=${TRAIN_FILE:-data/rl/train.parquet}
+VAL_FILE=${VAL_FILE:-data/rl/val.parquet}
+BENCHMARK_VAL_FILE=${BENCHMARK_VAL_FILE:-data/eval/benchmark_val.parquet}
 OUTPUT_DIR=${OUTPUT_DIR:-checkpoints/repolicy_grpo}
 NUM_GPUS=${NUM_GPUS:-8}
 BATCH_SIZE=${BATCH_SIZE:-64}

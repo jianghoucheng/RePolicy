@@ -19,6 +19,18 @@ def read_jsonl(path: str | Path):
                 yield json.loads(line)
 
 
+def read_rows(path: str | Path):
+    """Read either a JSONL or a parquet file of records."""
+
+    path = Path(path)
+    if path.suffix == ".parquet":
+        import pyarrow.parquet as pq
+
+        yield from pq.read_table(path).to_pylist()
+    else:
+        yield from read_jsonl(path)
+
+
 def f1_from_counts(tp: int, fp: int, fn: int) -> float:
     precision = tp / max(1, tp + fp)
     recall = tp / max(1, tp + fn)
@@ -28,11 +40,11 @@ def f1_from_counts(tp: int, fp: int, fn: int) -> float:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--predictions", required=True, help="JSONL with output/prediction/response/solution field.")
-    parser.add_argument("--references", required=True, help="RL JSONL containing reward_model and data_source.")
+    parser.add_argument("--references", required=True, help="RL JSONL or parquet with reward_model and data_source.")
     args = parser.parse_args()
 
-    preds = list(read_jsonl(args.predictions))
-    refs = list(read_jsonl(args.references))
+    preds = list(read_rows(args.predictions))
+    refs = list(read_rows(args.references))
     counts = defaultdict(lambda: {"tp": 0, "fp": 0, "fn": 0, "n": 0})
 
     for pred_row, ref_row in zip(preds, refs, strict=False):

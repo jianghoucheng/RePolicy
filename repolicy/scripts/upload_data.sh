@@ -13,8 +13,8 @@ DATA_DIR=${DATA_DIR:-data}
 PRIVATE=${PRIVATE:-false}
 
 test -f "${DATA_DIR}/sft/train.parquet" || { echo "missing ${DATA_DIR}/sft/train.parquet"; exit 1; }
-test -f "${DATA_DIR}/rl/train.jsonl"    || { echo "missing ${DATA_DIR}/rl/train.jsonl"; exit 1; }
-test -f "${DATA_DIR}/eval/benchmark_val.jsonl" || { echo "missing ${DATA_DIR}/eval/benchmark_val.jsonl"; exit 1; }
+test -f "${DATA_DIR}/rl/train.parquet"  || { echo "missing ${DATA_DIR}/rl/train.parquet"; exit 1; }
+test -f "${DATA_DIR}/eval/benchmark_val.parquet" || { echo "missing ${DATA_DIR}/eval/benchmark_val.parquet"; exit 1; }
 
 python3 - "$DATASET_REPO" "$DATA_DIR" "$PRIVATE" <<'PY'
 import sys

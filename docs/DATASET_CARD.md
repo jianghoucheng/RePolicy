@@ -14,6 +14,7 @@ size_categories:
   - 10K<n<100K
 configs:
   - config_name: sft
+    default: true
     data_files:
       - split: train
         path: sft/train.parquet
@@ -22,13 +23,13 @@ configs:
   - config_name: rl
     data_files:
       - split: train
-        path: rl/train.jsonl
+        path: rl/train.parquet
       - split: validation
-        path: rl/val.jsonl
+        path: rl/val.parquet
   - config_name: eval
     data_files:
       - split: test
-        path: eval/benchmark_val.jsonl
+        path: eval/benchmark_val.parquet
 ---
 
 # PolicyTraj-20K
@@ -51,9 +52,9 @@ trajectory-level supervision and clause-level policy grounding in one resource.
 |---|---|---|---|---|
 | `sft` | train | 5,000 | parquet | Cold-start SFT |
 | `sft` | validation | 500 | parquet | SFT validation |
-| `rl` | train | 14,425 | jsonl | GRPO training |
-| `rl` | validation | 500 | jsonl | GRPO validation |
-| `eval` | test | 7,369 | jsonl | Six-benchmark evaluation |
+| `rl` | train | 14,425 | parquet | GRPO training |
+| `rl` | validation | 500 | parquet | GRPO validation |
+| `eval` | test | 7,369 | parquet | Six-benchmark evaluation |
 
 The SFT and RL splits total 20,425 policy-grounded trajectories and are disjoint
 by construction. The RL train split is 8,186 unsafe / 6,239 safe.
@@ -61,9 +62,14 @@ by construction. The RL train split is 8,186 unsafe / 6,239 safe.
 `policies/policy_library.json` holds the 30-policy, 358-clause library the
 `Policy_N` ids in every example refer to.
 
+All splits are parquet (zstd). `extra_info.tools_kwargs` is a nested struct, not
+a string, because verl indexes into it during rollout; the `local_to_global_*` /
+`global_to_local_*` id maps *are* JSON strings, since their keys differ in every
+example and would otherwise force a distinct arrow schema per row.
+
 ## Evaluation split composition
 
-`eval/benchmark_val.jsonl` normalizes six agent safety benchmarks into one
+`eval/benchmark_val.parquet` normalizes six agent safety benchmarks into one
 binary trajectory-classification task. The counts describe this normalized
 split, not the original releases.
 
@@ -86,7 +92,7 @@ Please also cite the original benchmarks when using this split.
 
 ## Schema
 
-### `rl` and `eval` (verl-compatible JSONL)
+### `rl` and `eval` (verl-compatible parquet)
 
 ```python
 {

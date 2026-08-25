@@ -305,15 +305,6 @@ here; the built splits on the Hub are.
 - **Memory.** With `ROLLOUT_N=16` and 8×80GB, lower `PPO_MICRO_BATCH_SIZE` before anything else if you hit OOM.
 - The reward verifies the invoked policy and the final label, not that every sentence of the rationale is faithful to the policy.
 
-## Citation
-
-```bibtex
-@inproceedings{repolicy2026,
-  title     = {RePolicy: Reinforcement Learning for Safety-Policy Invocation in Agent Safeguards},
-  booktitle = {International Conference on Learning Representations (ICLR)},
-  year      = {2026}
-}
-```
 
 ## Acknowledgements
 

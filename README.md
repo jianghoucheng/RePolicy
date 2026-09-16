@@ -21,15 +21,6 @@ so it must decide *which* policy governs the trajectory before it can read any
 requirements. That turns safety-policy invocation into an agentic RL problem
 optimized directly through safeguard outcomes.
 
-Paper: RePolicy: Reinforcement Learning for Safety-Policy Invocation in Agent Safeguards
-```
-                policy invocation  →  policy content  →  safety reasoning  →  safety prediction
-
-  trajectory τ  ──┐
-                  ├──►  πθ  ──►  get_policy(["Policy_7"])  ──►  clause text  ──►  rationale + <JUDGE>unsafe</JUDGE>
-  policy titles ──┘                         ▲                                              │
-                                            └──────────── GRPO ◄───── R = 0.1·fmt + 0.3·pol + 0.6·acc
-```
 
 ## Results
 
